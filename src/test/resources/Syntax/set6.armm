@@ -1,0 +1,22 @@
+examples/set1.6rm: file format elf32-littlearm
+    
+Disassembly of section  .text:  
+
+10 <_start>:
+
+10:	eb000020 	ldm	r2,{r3,r5,pc}
+68:	eb00003c 	stm	pc!,{r1,r7,r10}
+74:	e12fff1e 	ldmdb lr, {r1,r11}
+
+110:	eb000020 	ldmne	r2,{r3,r5,pc}
+168:	eb00003c 	stmibeq	pc,{r1,r7,r9,r10}
+174:	e12fff1e 	ldmdb lr, {r1,r11}
+
+210:	eb000020 	stmdalt	r2,{r3,r5,pc}
+268:	eb00003c 	stmhi	pc!,{r1,r7,r10}
+274:	e12fff1e 	ldmdbcs lr, {r1,r11}
+
+
+310:	eb000020 	push	{r3}
+368:	eb00003c 	pop	{r1,r7,r10}
+374:	e12fff1e 	pushne {r1,r11}

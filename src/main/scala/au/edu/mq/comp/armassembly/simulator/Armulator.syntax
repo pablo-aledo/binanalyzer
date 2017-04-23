@@ -1,0 +1,164 @@
+module au.edu.mq.comp.armassembly.simulator.Simulator;
+
+header {
+    import au.edu.mq.comp.armassembly.simulator.SimulatorSyntax.*;
+    import scala.math.BigInt;
+}
+
+Cmd =
+      QuitCmd 
+    | SetCmd
+    | SingleInstruction
+    | Display
+    | JumpCmd
+    | HookCmd
+    | RawCmd .
+
+SetCmd : Cmd =
+    'set ' Register '=' Hex '\n' .
+
+SingleInstruction : Cmd =
+    'si\n' .
+
+Display : Cmd =
+    'p/x ' Register '\n'.
+
+QuitCmd : Cmd =
+    'quit\n'.
+
+Register = 
+    '$' RegisterName .
+
+HookCmd : Cmd =
+    'target remote localhost:1234\n' .
+
+JumpCmd : Cmd {nospacing} =
+    'set $pc=0x' Hex '\n' .
+
+RawCmd : Cmd =
+   Raw '\n' .
+
+Raw : String =
+    _+ .
+
+RegisterName  =
+      ShortReg Spacing
+    | DoubleReg Spacing
+    | FPReg Spacing
+    | R0
+    | R2
+    | R3
+    | R4
+    | R5
+    | R6
+    | R7
+    | R8
+    | R9
+    | R10
+    | R11
+    | R12
+    | R13
+    | R14
+    | R15
+    | R1.
+
+FPReg : RegisterName =
+        FPReg1
+    |   FPReg2.
+
+FPReg1 : RegisterName =
+     'APSR_nzcv'.
+
+FPReg2 : RegisterName  =
+  'fpscr' .
+
+ShortReg : RegisterName {nospacing} =
+  's' Integer .
+
+DoubleReg : RegisterName {nospacing} =
+  'd' Integer .
+
+R0 : RegisterName =
+    'r0' .
+
+R1 : RegisterName =
+    'r1' .
+
+R2 : RegisterName =
+    'r2' .
+
+R3 : RegisterName =
+    'r3' .
+
+R4 : RegisterName =
+    'r4' .
+
+R5 : RegisterName =
+    'r5' .
+
+R6 : RegisterName =
+    'r6' .
+
+R7 : RegisterName =
+    'r7' .
+
+R8 : RegisterName =
+    'r8' .
+
+R9 : RegisterName =
+    'r9'  .
+
+R10 : RegisterName  =
+  R10Orsl .
+
+R10Orsl : String =
+    'r10' / 'sl' .
+
+R11 : RegisterName  =
+    R11Orfp.
+
+R11Orfp : String =
+  'r11' / 'fp' .
+
+R12 : RegisterName  =
+    R12Orip.
+
+R12Orip : String =
+  'r12' / 'ip' .
+
+R13 : RegisterName  =
+    R13Orsp .
+
+R13Orsp : String =
+  'r13' | 'sp' .
+
+R14 : RegisterName  =
+    R14Orlr.
+
+R14Orlr : String =
+  'r14' / 'lr' .
+
+R15 : RegisterName  =
+    R15Orpc.
+
+R15Orpc : String =
+  'r15' / 'pc' .
+
+CmdResponse =
+    StringResponse.
+
+StringResponse : String =
+    _+ .
+
+//  integers
+Integer : String =
+  Digits Spacing.
+
+Digits : String =
+  Digit+.
+
+Digit : String =
+  [0-9].
+
+Hex : String =
+  [0-9a-fA-F] .

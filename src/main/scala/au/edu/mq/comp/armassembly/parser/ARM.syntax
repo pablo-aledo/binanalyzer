@@ -1,0 +1,442 @@
+module au.edu.mq.comp.armassembly.parser.arm;
+
+header {
+    import au.edu.mq.comp.armassembly.parser.armSyntax.*;
+    import scala.math.BigInt;
+}
+
+//option verbose;
+
+//  ARM binary program
+//  It is a list of functions
+Program =
+  Spacing FormatSection TypeSection Function+ EOF.
+
+//  Preamble
+FilePathName: String =
+  [0-9a-zA-Z./_]+ .
+
+//  function name within brackets
+Name {nospacing} =
+    '<' NoBracket '>' .
+
+//  Format name
+FormatName : String =
+    "elf32-littlearm" Spacing .
+
+//  First non-empty line of the file
+FormatSection =
+    FilePathName ":" "file" "format" FormatName \n .
+
+TypeSection =
+    "Disassembly" "of" "section" FilePathName ':' \n .
+
+
+//  A function is a list of instructions
+Function =
+    Address sp Name ":"
+    nestnl(FullInstruction*) \n.
+
+//  Anchored instruction
+Address =
+  Hex Spacing .
+
+
+//  ARMComment
+ARMComment : Void =
+    ";" (!EOL _)* (EOL / EOF).
+
+NoBracket : String = (!">" _)* .
+
+FullInstruction  =
+    Spacing Address ':' Codes Instruction ARMComment? \n Spacing.
+
+Codes =
+    Code sp Code?.
+
+Code {nospacing} =
+  FourHex Spacing .
+
+FourHex : String =
+  [0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F] .
+
+OperandType =
+      RegisterShiftConst
+  |   ScaledRegisterOffset
+  |   ImmediatePostIndexed
+  |   RegisterShiftReg
+  |   Register
+  |   RegisterOffset
+  |   Constant .
+
+Register : OperandType =
+    RegisterName '!'? Spacing.
+
+ImmediatePostIndexed : OperandType =
+  '[' Register ']' ',' '#' Hex Spacing.
+
+RegisterOffset : OperandType =
+    '[' Register ',' Constant ']' '!'?                          {WithOffset}
+  | '[' Register ']'                                            {WithoutOffset}
+  | '[' Register "," Register ']'                               {TwoRegisters} .
+
+RegisterShiftConst : OperandType =
+    Register "," ShiftOp sp Constant .
+
+ScaledRegisterOffset : OperandType =
+    '[' Register ',' Register ',' ShiftOp Constant ']' .
+
+RegisterShiftReg : OperandType =
+   Register "," ShiftOp sp Register.
+
+Constant : OperandType {nospacing} =
+  '#' '-'? HexAndDot Spacing .
+
+Instruction  =
+    Inst1
+  | Inst2
+  | Inst3
+  | Inst4
+  | Inst5
+  | Inst6
+  | Inst7
+  | Inst8
+  | Inst9
+  | Inst10
+  | Inst11
+  | BOp
+  | InstrWord.
+
+InstrWord : Instruction =
+      Spacing '.word' '0x' HexNumber.
+
+Inst1 : Instruction =
+  Mnemonic1 sp Operands .
+
+Mnemonic1 {nospacing} =
+  VFlagTag Op1 SFlagTag Cond Type WidthSp Spacing.
+
+Op1 =
+      ArithmOpName
+    | ShiftOpName.
+
+//  operators for shift operations
+ShiftOpName : Op1 {nospacing} =
+        'asr'                                                    {ASR}
+    |   'lsl'                                                    {LSL}
+    |   'lsr'                                                    {LSR}
+    |   'ror'                                                    {ROR}.
+
+//  Arithmetic and bitwise operators
+ArithmOpName : Op1 {nospacing}  =
+        'add'                                                    {ADD}
+    |   'sub'                                                    {SUB}
+    |   'mul'                                                    {MUL}
+    |   'smull'                                                  {SMULL}
+    |   'umull'                                                  {UMULL}
+    |   'umlal'                                                  {UMLAL}
+    |   'smulbb'                                                 {SMULBB}
+    |   'div'                                                    {DIV}
+    |   'rsb'                                                    {RSB}
+    |   'adc'                                                    {ADC}
+    |   'sbc'                                                    {SBC}
+    |   'rsc'                                                    {RSC}
+    |   'rrx'                                                    {RRX}
+    |   'and'                                                    {AND}
+    |   'orr'                                                    {ORR}
+    |   'eor'                                                    {EOR}
+    |   'uxt'                                                    {UXT}
+    |   'sxt'                                                    {SXT}
+    |   'bic'                                                    {BIC}.
+
+Inst2 : Instruction =
+  Mnemonic2 Operands .
+
+Mnemonic2 {nospacing} =
+  VFlagTag Op2 Cond WidthSp Spacing.
+
+//  Comparisons operators
+Op2 {nospacing} =
+        'cmp'                                                    {CMP}
+    |   'cmn'                                                    {CMN}
+    |   'tst'                                                    {TST}
+    |   'teq'                                                    {TEQ}.
+
+Inst3 : Instruction =
+  Mnemonic3 Operands .
+
+Mnemonic3 {nospacing} =
+  VFlagTag Op3 SFlagTag Cond WidthSp Spacing.
+
+//  Move operators
+Op3 {nospacing} =
+        'movw'                                                  {MOVW}
+    |   'movt'                                                  {MOVT}
+    |   'mov'                                                   {MOV}
+    |   'mvn'                                                   {MVN}
+    |   'movhi'                                                 {MOVHI}
+    |   'movls'                                                 {MOVLS}
+    |   'mrs'                                                   {MRS}.
+
+Inst4 : Instruction =
+  Mnemonic4 '{' Register ++ ',' '}' .
+
+Mnemonic4 {nospacing} =
+    VFlagTag 'push'   Cond  Spacing                                       {Push}
+  | VFlagTag 'pushhi' Cond  Spacing                                       {PushHi}
+  | VFlagTag 'pophi'  Cond  Spacing                                       {PopHi}
+  | VFlagTag 'pop'    Cond  Spacing                                       {Pop}  .
+
+Inst5 : Instruction =
+  Mnemonic5 Operands .
+
+Mnemonic5 {nospacing} =
+    VFlagTag "str" Type WidthSp Spacing                         {Store}
+  | VFlagTag "ldr" Cond Type WidthSp Spacing                         {Load} .
+
+Inst6 : Instruction =
+  Mnemonic6 Register ',' Register .
+
+Mnemonic6 {nospacing} =
+  VFlagTag 'neg' SFlagTag WidthSp Spacing .
+
+Inst7 : Instruction =
+  Mnemonic7 .
+
+Mnemonic7 {nospacing} =
+  'nop' WidthSp Spacing .
+
+Inst8 : Instruction =
+  Mnemonic8 Operands .
+
+Mnemonic8 {nospacing} =
+  VFlagTag "cvt" WidthSp WidthSp Spacing .
+
+Inst9 : Instruction =
+  Mnemonic9 Cond .
+
+Mnemonic9 : String =
+  "ite" Spacing .
+
+Inst10 : Instruction =
+  Mnemonic10 Operands .
+
+Mnemonic10 : String =
+  "ubfx" Spacing .
+
+Inst11 : Instruction =
+    Mnemonic11 Register "," '{' Register ++ ',' '}' .
+
+Mnemonic11 {nospacing} =
+    "stm" IADB? WidthSp Spacing                                  {StoreMultiple}
+  | "ldm" IADB? WidthSp Spacing                                  {LoadMultiple} .
+
+EFlagTag {nospacing} =
+    'e'                                                         {EFlag}
+  |                                                             {NoEFlag} .
+
+IADB =
+   "ia"                                                         {IncrementAfter}
+ | "db"                                                         {DecrementBefore} .
+
+VFlagTag {nospacing} =
+    "v"                                                         {VFlag}
+  |                                                             {NoVFlag} .
+
+Operands =
+    Register "," Register "," OperandType "," OperandType       {FourOperands}
+  | Register "," Register "," OperandType                       {ThreeOperands}
+  | Register "," OperandType                                    {TwoOperands} .
+
+BOp : Instruction {nospacing}  =
+        'b' Cond WidthSp Spacing Hex Spacing TargetPC?          {Branch}
+   |    'bl' Cond WidthSp Spacing Hex Spacing TargetPC?         {BranchLink}
+   |    'bx' Cond WidthSp Spacing Register   TargetPC?          {BranchExchange}.
+
+Cond {nospacing} =
+        'ne'                                                    {CondNE}
+      | 'eq'                                                    {CondEQ}
+      | 'cc'                                                    {CondCC}
+      | 'cs'                                                    {CondCS}
+      | 'lt'                                                    {CondLT}
+      | 'le'                                                    {CondLE}
+      | 'gt'                                                    {CondGT}
+      | 'ge'                                                    {CondGE}
+      | 'pl'                                                    {CondPL}
+      | 'ls'                                                    {CondLS}
+      | 'mi'                                                    {CondMI}
+      | 'hi'                                                    {CondHI}
+      |                                                         {CondTrue}.
+
+TargetPC =
+        "<" FunName "+" Offset ">"                              {FunNameAndOffset}
+    |   "<" FunName ">"                                         {FunNameOnly}.
+
+Offset : String =
+  "0x" Hex .
+
+FunName : String =
+    (!FunDelim _)*  .
+
+FunDelim : String =
+    '+' | '>' .
+
+WidthSp {nospacing} =
+    '.n'                                                        {SixteenBits}
+  | '.w'                                                        {ThirtyTwoBits}
+  | '.f32'                                                      {FloatThirtyTwoBits}
+  | '.u32'                                                      {UnsignedThirtyTwobits}
+  | '.s32'                                                      {ShortThirtyTwoBits}
+  | '.f64'                                                      {FloatSixtyFourBits}
+  |                                                             {NoWidth} .
+
+Type {nospacing} =
+    'd' Spacing                                                 {DoubleWidth}
+  | 'b' Spacing                                                 {ByteWidth}
+  | 'h' Spacing                                                 {HalfWidth}
+  | 'sh' Spacing                                                {ShortWidth}
+  |      Spacing                                                {NoType} .
+
+//  s-condition flag
+SFlagTag {nospacing} =
+      's'                                                       {SFlag}
+    | 'w'                                                       {WFlag}
+    |                                                           {NoSFlag}.
+
+//  names of ARM registers
+RegisterName  =
+      ShortReg Spacing
+    | DoubleReg Spacing
+    | FPReg Spacing
+    | R0
+    | R2
+    | R3
+    | R4
+    | R5
+    | R6
+    | R7
+    | R8
+    | R9
+    | R10
+    | R11
+    | R12
+    | R13
+    | R14
+    | R15
+    | R1.
+
+FPReg : RegisterName =
+        FPReg1
+    |   FPReg2.
+
+FPReg1 : RegisterName =
+     "APSR_nzcv".
+
+FPReg2 : RegisterName  =
+  "fpscr" .
+
+ShortReg : RegisterName {nospacing} =
+  's' Integer .
+
+DoubleReg : RegisterName {nospacing} =
+  'd' Integer .
+
+R0 : RegisterName =
+    'r0' .
+
+R1 : RegisterName =
+    'r1' .
+
+R2 : RegisterName =
+    'r2' .
+
+R3 : RegisterName =
+    'r3' .
+
+R4 : RegisterName =
+    'r4' .
+
+R5 : RegisterName =
+    'r5' .
+
+R6 : RegisterName =
+    'r6' .
+
+R7 : RegisterName =
+    'r7' .
+
+R8 : RegisterName =
+    'r8' .
+
+R9 : RegisterName =
+    'r9'  .
+
+R10 : RegisterName  =
+  R10Orsl .
+
+R10Orsl : String =
+    'r10' / 'sl' .
+
+R11 : RegisterName  =
+    R11Orfp.
+
+R11Orfp : String =
+  'r11' / 'fp' .
+
+R12 : RegisterName  =
+    R12Orip.
+
+R12Orip : String =
+  'r12' / 'ip' .
+
+R13 : RegisterName  =
+    R13Orsp .
+
+R13Orsp : String =
+  'r13' | 'sp' .
+
+R14 : RegisterName  =
+    R14Orlr.
+
+R14Orlr : String =
+  'r14' / 'lr' .
+
+R15 : RegisterName  =
+    R15Orpc.
+
+R15Orpc : String =
+  'r15' / 'pc' .
+
+ShiftOp =
+  ShiftOpName Spacing .
+
+//  hexadecimal numbers
+Hex : String =
+  ['-'0-9a-fA-F]+ .
+
+HexAndDot : String =
+  ['-'0-9a-fA-F.]+ .
+
+HexNumber = Hex Spacing  .
+
+//  integers
+Integer : String =
+  Digits Spacing.
+
+Digits : String =
+  Digit+.
+
+Digit : String =
+  [0-9].
+
+StackAt : String =
+  [0-9]+ .
+
+//  This is not part of actual ARM assembly syntax but provided as a convenience type for
+//  computing USE/DEFS
+Vars =
+    "stack"                                                     {VarStack}
+|   StackAt                                                     {VarStackAt}
+|   "mem"                                                       {VarMem}
+|   RegisterName                                                {VarReg}
+|   Cond                                                        {VarCond}.

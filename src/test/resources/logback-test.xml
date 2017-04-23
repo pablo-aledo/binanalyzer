@@ -1,0 +1,79 @@
+<configuration>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern> [%-5level] %logger{56} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <property name="DEFAULT_PATTERN" value="%d{HH:mm:ss} %-5level %logger{0} - %msg%n"/>
+    <property name="SHORT_PATTERN" value="[%-5level] %logger{36} - %msg%n"/>
+
+    <appender name="EXPECTFILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/expect.log</file>
+        <append>false</append>
+        <encoder>
+            <pattern>${DEFAULT_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="CFGFILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/cfg.log</file>
+        <append>false</append>
+        <encoder>
+            <pattern>${DEFAULT_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="WCETFILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/wcet.log</file>
+        <append>false</append>
+        <encoder>
+            <pattern>${DEFAULT_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="PARSERFILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/parser.log</file>
+        <append>false</append>
+        <encoder>
+            <pattern>${DEFAULT_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="SIMULFILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/simulator.log</file>
+        <append>false</append>
+        <encoder>
+            <pattern>${DEFAULT_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- configure top level logger  -->
+    <logger name="au.edu.mq.comp.armassembly.cfg" level="OFF" additivity="false">
+        <appender-ref ref="CFGFILE"/>
+    </logger>
+
+    <logger name="au.edu.mq.comp.armassembly.parser" level="ERROR" additivity="false">
+        <appender-ref ref="PARSERFILE"/>
+    </logger>
+
+    <logger name="au.edu.mq.comp.armassembly.parser" level="OFF" additivity="false">
+        <appender-ref ref="PARSERFILE"/>
+    </logger>
+
+    <logger name="au.edu.mq.comp.armassembly.simulator" level="ALL" additivity="false">
+        <appender-ref ref="SIMULFILE"/>
+    </logger>
+
+    <!-- Expect loggers -->
+    <logger name="au.edu.mq.comp.expect.Expect" level="DEBUG" additivity="false">
+        <appender-ref ref="EXPECTFILE"/>
+    </logger>
+
+    <!-- Root logger -->
+    <root level="OFF">
+        <appender-ref ref="WCETFILE"/>
+    </root>
+
+</configuration>

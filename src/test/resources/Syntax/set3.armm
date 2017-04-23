@@ -1,0 +1,68 @@
+examples/set3.arm: file format elf32-littlearm
+    
+Disassembly of section  .text:
+
+9c <_start>:
+
+498:	d3a00001 	movle	r0, #1
+     4a0:	d3a00000 	movle	r0, #0
+     4c4:	b1a07001 	movlt	r7, r1
+     4cc:	e3a02000 	mov	r2, #0
+    770:	51a0100a 	movpl	r1, sl
+     7cc:	e1a09003 	mov	r9, r3
+
+     80c:	e3a01c01 	mov	r1, #256	; 0x100
+     828:	e3a09c01 	mov	r9, #256	; 0x100
+
+     858:	c3a06000 	movgt	r6, #0
+     8a8:	e3a03000 	mov	r3, #0
+     8c0:	c3a01000 	movgt	r1, #0
+
+     8cc:	d3a01000 	movle	r1, #0
+     8f8:	e3a03000 	mov	r3, #0
+     9d4:	e3a00f7f 	mov	r0, #508	; 0x1fc
+     9e0:	e3a01009 	mov	r1, #9
+     be4:	e3a01c27 	mov	r1, #9984	; 0x2700
+     bf0:	11a0c002 	movne	ip, r2
+     bf4:	03a0cc01 	moveq	ip, #256	; 0x100
+
+     c70:	e3a04801 	movs	r4, #65536	; 0x10000
+     c80:	c3a02008 	movsgt	r2, #8
+     c8c:	e1a02000 	mov	r2, r0
+     d0c:	51a0c004 	movpl	ip, r4
+     df8:	e1a0b002 	mov	fp, r2
+     e8c:	03a00001 	moveq	r0, #1
+
+    10dc:	e3a00831 	mov	r0, #3211264	; 0x310000
+    10f0:	e3a00000 	mov	r0, #0
+    10f4:	e3a03001 	mov	r3, #1
+    1168:	e3a01801 	mov	r1, #65536	; 0x10000
+    117c:	e3a01035 	mov	r1, #53	; 0x35
+    1194:	e3a00010 	mov	r0, #16
+    11dc:	e1b03000 	movs	r3, r0
+    11fc:	03a02008 	moveq	r2, #8
+    1200:	13a02001 	movne	r2, #1
+    122c:	e3a00000 	mov	r0, #0
+    1288:	33a00000 	movcc	r0, #0
+    12a0:	23a02010 	movcs	r2, #16
+    12a4:	33a02000 	movcc	r2, #0
+    12e4:	b3a00102 	movlt	r0, #-2147483648	; 0x80000000
+
+  105c:	c3e00102 	mvngt	r0, #-2147483648	; 0x80000000
+      80:	e3e0cd62 	mvn	ip, #6272	; 0x1880
+      90:	e1e06005 	mvn	r6, r5
+     670:	43e0c07f 	mvnmi	ip, #127	; 0x7f
+
+    1814:	c3e00102 	mvngt	r0, #-2147483648	; 0x80000000
+      9c:	e3e0cd62 	mvn	ip, #6272	; 0x1880
+      ac:	e1e06005 	mvn	r6, r5, asr #2
+     70c:	43e0c07f 	mvnmi	ip, #127	; 0x7f
+
+     8f4:	e3e03d62 	mvn	r3, #6272	; 0x1880
+     904:	e1e06005 	mvn	r6, r5
+
+    1c78:	43e0607f 	mvnmi	r6, #127	; 0x7f
+    1c88:	43e0b07f 	mvnmi	fp, #127	; 0x7f
+    1dc0:	43e0b07f 	mvnmi	fp, #127	; 0x7f
+    215c:	e3e0ed62 	mvn	lr, #6272	; 0x1880
+    24ac:	c3e00102 	mvngt	r0, #-2147483648	; 0x80000000

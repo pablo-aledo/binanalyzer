@@ -1,0 +1,14 @@
+examples/set7.arm: file format elf32-littlearm
+    
+Disassembly of section  .text:  
+
+00010 <_start>:
+
+10:	eb000020 	umull	r2,r4, r5, r6
+68:	eb00003c 	umulls r3, r5, r10, r5
+74:	e12fff1e 	umullle r1, r2, r5, r6
+
+10:	eb000020 	umlalls	r2,r3,r5,r10
+68:	eb00003c 	smullle   r0,r1,r7,r9
+74:	e12fff1e 	smullscc lr,r1,r11, r5
+

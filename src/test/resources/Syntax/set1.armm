@@ -1,0 +1,82 @@
+examples/set1.arm: file format elf32-littlearm
+    
+Disassembly of section  .text:  
+
+0001d2c <_start>:
+
+ 0001d2c:	e28bac01 	add	ip, fp, #256	; 0x100
+ 0001d3c:	e082c004 	add	ip, r2, #-4065
+ 0001fdc:	e088a108 	add	sl, r8, r8, lsl #2
+ 0001d4c:	e0820005 	adds	r8, r2, r5
+ 00020fc:	e28ee106 	add	lr, lr, #-2147483647	; 0x00000001
+ 0001d5c:	e0821000 	addeq	r1, r2, r0
+ 0001f7c:	e0847184 	addslt	r7, r4, r4, lsl #3
+ 0001f88:	e08c708c 	add	r7, ip, ip, lsl #1
+ 0001f90:	e08cc28c 	add	ip, ip, ip, lsl #5
+ 0001f94:	e084c08c 	add	ip, r4, ip, lsl #1
+ 
+ 710:	e2401010 	sub	r1, r0, #16
+     730:	e251a010 	subs	sl, r1, #16
+     780:	e2418001 	sub	r8, r1, #1
+     788:	e2582000 	subs	r2, r8, #0
+     7b0:	12422001 	subne	r2, r2, #1
+     7b8:	e2422001 	sub	r2, r2, #1
+     7bc:	e2422001 	sub	r2, r2, #1
+     7d4:	e2422004 	sub	r2, r2, #4
+     7e8:	e2433010 	sub	r3, r3, #16
+     810:	e2492008 	sub	r2, r9, #8
+     844:	c2422008 	subgt	r2, r2, #8
+
+   11e0:	42603000 	rsbmi	r3, r0, #0
+    1274:	42600000 	rsbmi	r0, r0, #0
+    1280:	42600000 	rsbmi	r0, r0, #0
+    12d4:	42600000 	rsbmi	r0, r0, #0
+ 0001d80:	e0611008 	rsbslt	r1, r1, r8
+ 0001d90:	e06cc007 	rsb	ip, ip, r7
+ 0001da4:	e06cc207 	rsb	ip, ip, r7, lsl #4
+ 0001da8:	e06cc28c 	rsbne	ip, ip, ip, lsl #5
+ 0001db0:	e0600287 	rsb	r0, r0, r7, lsl #5
+ 0001dc8:	e0610901 	rsbs	r0, r1, r1, lsl #18
+
+ 0001d7c:	e081c008 	adc	ip, r1, r8
+ 0001d80:	e0611008 	adc	r1, r1, #24
+ 0001d9c:	e081c000 	add	ip, r1, r0
+ 0001da0:	e08c718c 	adcs	r7, ip, ip, lsl #3
+ 
+ 0001da4:	e06cc207 	sbc	ip, ip, r7, lsl #4
+ 0001da8:	e06cc28c 	sbc	ip, ip, #5
+ 0001dac:	e0807080 	sbcs	r7, r0, r0, lsl #1
+ 0001db0:	e0600287 	sbcne	r0, r0, r7, lsl #5
+ 0001db4:	e0000280 	sbcsge	r0, r0, r0, lsl #5
+ 
+ 898:	e20330ff 	and	r3, r3, #255	; 0xff
+ 1c4:	e2053007 	ands	r3, r5, #7
+ 1dc:	e0071006 	andgt	r1, r7, r6
+ 1e0:	e00cc310 	andsgt	ip, ip, r0, lsl r3
+ 19c:	e2022001 	and	r2, r2, #1
+ 2bc:	e201c007 	and	ip, r1, #7
+ 2d8:	e0066c10 	andne	r6, r6, r0, lsl ip
+ 2dc:	e007700a 	and	r7, r7, sl
+ 8a8:	e2000001 	andseq	r0, r0, #1
+
+100c:	03800001 	orreq	r0, r0, #1
+    14c4:	e1800307 	orrs	r0, r0, r7, lsl #6
+    176c:	21800002 	orrcs	r0, r0, r2
+    17c4:	03800001 	orrlt	r0, r0, #4096
+    1c58:	e180030c 	orr	r0, r0, ip, lsl #6
+    2404:	21800002 	orrscc	r0, r0, r2
+
+ 558:	e0204fc0 	eor	r4, r0, r0, asr #31
+    16b8:	e02b0fcb 	eorne	r0, fp, fp, asr #31
+    2398:	e020c001 	eors	ip, r0, r1
+ 29c:	e0234007 	eor	r4, r3, #12
+ b10:	e020c001 	eorlt	ip, r0, #-19
+ 544:	e0266910 	eorsge	r6, r6, r0, lsl r9
+
+    440:	e3c00003 	bics	r0, r0, #3
+     450:	e1c10fc1 	bicsne	r0, r1, r1, asr #31
+     5a0:	e1c10fc1 	bic	r0, r1, r1, asr #31
+     62c:	e3c03003 	biclt	r3, r0, #3
+    1168:	e3c2b003 	biccc	fp, r2, #3
+    1768:	e3c20003 	biccs	r0, r2, #3
+

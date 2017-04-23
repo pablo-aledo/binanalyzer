@@ -1,0 +1,504 @@
+
+examples/set4.arm: file format elf32-littlearm
+    
+Disassembly of section  .text:    
+00000010 <initbuffer>:
+
+  10:	eb000020 	bl	98 <initbuffer>
+  68:	eb00003c 	bl	160 <compress>
+  74:	e12fff1e 	bx	lr
+  ac:	ea000025 	b	148 <initbuffer+0xb0>
+ 150:	daffffd6 	ble	b0 <initbuffer+0x18>
+ 158:	e12fff1e 	bx	lr
+ 1f8:	0a000002 	beq	208 <compress+0xa8>
+ 204:	ea000000 	b	20c <compress+0xac>
+ 214:	eb00011f 	bl	698 <getbyte>
+ 22c:	ea000001 	b	238 <compress+0xd8>
+ 244:	dafffff9 	ble	230 <compress+0xd0>
+ 258:	eb0000d5 	bl	5b4 <clhash>
+ 25c:	ea00006c 	b	414 <compress+0x2b4>
+ 268:	eb00010a 	bl	698 <getbyte>
+ 2b0:	1a000006 	bne	2d0 <compress+0x170>
+ 2cc:	ea000050 	b	414 <compress+0x2b4>
+ 2e0:	ba000023 	blt	374 <compress+0x214>
+ 2ec:	1a000002 	bne	2fc <compress+0x19c>
+ 2f4:	ea000000 	b	2fc <compress+0x19c>
+ 304:	aa000000 	bge	30c <compress+0x1ac>
+ 31c:	1a000006 	bne	33c <compress+0x1dc>
+ 338:	ea000035 	b	414 <compress+0x2b4>
+ 34c:	da000009 	ble	378 <compress+0x218>
+ 36c:	baffffe1 	blt	2f8 <compress+0x198>
+ 370:	ea000000 	b	378 <compress+0x218>
+ 3a4:	aa00000f 	bge	3e8 <compress+0x288>
+ 3e4:	ea00000a 	b	414 <compress+0x2b4>
+ 3fc:	ba000004 	blt	414 <compress+0x2b4>
+ 40c:	0a000000 	beq	414 <compress+0x2b4>
+ 410:	eb000021 	bl	49c <cl_block>
+ 420:	caffff8e 	bgt	260 <compress+0x100>
+ 438:	da000002 	ble	448 <compress+0x2e8>
+ 450:	e12fff1e 	bx	lr
+0000049c <cl_block>:
+ 4cc:	da00000e 	ble	50c <cl_block+0x70>
+ 4e0:	1a000001 	bne	4ec <cl_block+0x50>
+ 4e8:	ea000011 	b	534 <cl_block+0x98>
+ 4fc:	eb000181 	bl	b08 <__aeabi_idiv>
+ 508:	ea000009 	b	534 <cl_block+0x98>
+ 528:	eb000176 	bl	b08 <__aeabi_idiv>
+ 540:	da000002 	ble	550 <cl_block+0xb4>
+ 54c:	ea00000f 	b	590 <cl_block+0xf4>
+ 568:	eb000011 	bl	5b4 <cl_hash>
+ 58c:	eb00008c 	bl	7c4 <output>
+ 594:	e12fff1e 	bx	lr
+000005b4 <cl_hash>:
+ 668:	aaffffdb 	bge	5dc <cl_hash+0x28>
+ 670:	ea000002 	b	680 <cl_hash+0xcc>
+ 684:	cafffffa 	bgt	674 <cl_hash+0xc0>
+ 690:	e12fff1e 	bx	lr
+00000698 <getbyte>:
+ 6a4:	da000016 	ble	704 <getbyte+0x6c>
+ 6d0:	0a00000b 	beq	704 <getbyte+0x6c>
+ 700:	ea000000 	b	708 <getbyte+0x70>
+ 70c:	e12fff1e 	bx	lr
+0000071c <putbyte>:
+ 748:	e12fff1e 	bx	lr
+00000750 <writebytes>:
+ 764:	ea00000c 	b	79c <writebytes+0x4c>
+ 7a8:	aa000002 	bge	7b8 <writebytes+0x68>
+ 7b4:	daffffeb 	ble	768 <writebytes+0x18>
+ 7bc:	e12fff1e 	bx	lr
+ 7ec:	ba000097 	blt	a50 <output+0x28c>
+ 868:	da000007 	ble	88c <output+0xc8>
+ 890:	0a000002 	beq	8a0 <output+0xdc>
+ 8d4:	1a000016 	bne	934 <output+0x170>
+ 904:	ebffff84 	bl	71c <putbyte>
+ 910:	0a000004 	beq	928 <output+0x164>
+ 924:	dafffff3 	ble	8f8 <output+0x134>
+ 948:	ca000003 	bgt	95c <output+0x198>
+ 958:	da00005b 	ble	acc <output+0x308>
+ 968:	da00000b 	ble	99c <output+0x1d8>
+ 97c:	ebffff73 	bl	750 <writebytes>
+ 9b4:	0a00000d 	beq	9f0 <output+0x22c>
+ 9ec:	ea000037 	b	ad0 <output+0x30c>
+ a18:	1a000004 	bne	a30 <output+0x26c>
+ a2c:	ea000027 	b	ad0 <output+0x30c>
+ a4c:	ea00001f 	b	ad0 <output+0x30c>
+ a5c:	da000009 	ble	a88 <output+0x2c4>
+ a84:	ebffff31 	bl	750 <writebytes>
+ ac8:	ea000000 	b	ad0 <output+0x30c>
+ ad8:	e12fff1e 	bx	lr
+00000b08 <__aeabi_idiv>:
+ b0c:	0a000043 	beq	c20 <.divsi3_nodiv0+0x110>
+00000b10 <.divsi3_nodiv0>:
+ b10:	e020c001 	eor	ip, r0, r1
+ b1c:	0a000027 	beq	bc0 <.divsi3_nodiv0+0xb0>
+ b2c:	9a000026 	bls	bcc <.divsi3_nodiv0+0xbc>
+ b30:	e1110002 	tst	r1, r2
+ b34:	0a000028 	beq	bdc <.divsi3_nodiv0+0xcc>
+ b38:	e311020e 	tst	r1, #-536870912	; 0xe0000000
+ b58:	3afffffa 	bcc	b48 <.divsi3_nodiv0+0x38>
+ b6c:	3afffffa 	bcc	b5c <.divsi3_nodiv0+0x4c>
+ b7c:	21800002 	orrcs	r0, r0, r2
+ b88:	218000a2 	orrcs	r0, r0, r2, lsr #1
+ b94:	21800122 	orrcs	r0, r0, r2, lsr #2
+ ba0:	218001a2 	orrcs	r0, r0, r2, lsr #3
+
+ bb0:	1affffef 	bne	b74 <.divsi3_nodiv0+0x64>
+ bbc:	e12fff1e 	bx	lr
+ bc0:	e13c0000 	teq	ip, r0
+ bc8:	e12fff1e 	bx	lr
+ bd4:	03800001 	orreq	r0, r0, #1
+ bd8:	e12fff1e 	bx	lr
+
+ c1c:	e12fff1e 	bx	lr
+ c2c:	ea000007 	b	c50 <__aeabi_idiv0>
+00000c30 <__aeabi_idivmod>:
+ c34:	0afffff9 	beq	c20 <.divsi3_nodiv0+0x110>
+ c3c:	ebffffb3 	bl	b10 <.divsi3_nodiv0>
+ c4c:	e12fff1e 	bx	lr
+00000c50 <__aeabi_idiv0>:
+ c50:	e12fff1e 	bx	lr
+00000000 <initbuffer>:
+  50:	1afffff1 	bne	1c <initbuffer+0x1c>
+  58:	e12fff1e 	bx	lr
+  b8:	5affffec 	bpl	70 <cl_hash+0x10>
+  c0:	d12fff1e 	bxle	lr
+  d0:	1afffffc 	bne	c8 <cl_hash+0x68>
+  d4:	e12fff1e 	bx	lr
+000000dc <getbyte>:
+  e8:	da00000d 	ble	124 <getbyte+0x48>
+ 100:	da000007 	ble	124 <getbyte+0x48>
+ 120:	e12fff1e 	bx	lr
+ 128:	e12fff1e 	bx	lr
+00000138 <putbyte>:
+ 148:	e12fff1e 	bx	lr
+00000150 <writebytes>:
+ 158:	da00000d 	ble	194 <writebytes+0x44>
+ 190:	1afffff3 	bne	164 <writebytes+0x14>
+ 198:	e12fff1e 	bx	lr
+ 1b8:	ba000062 	blt	348 <output+0x1a8>
+ 224:	1a00000f 	bne	268 <output+0xc8>
+ 244:	ebffffbb 	bl	138 <putbyte>
+ 24c:	0a000002 	beq	25c <output+0xbc>
+ 258:	1afffff8 	bne	240 <output+0xa0>
+ 27c:	ca000003 	bgt	290 <output+0xf0>
+ 28c:	da00003e 	ble	38c <output+0x1ec>
+ 29c:	da000008 	ble	2c4 <output+0x124>
+ 2ac:	ebffffa7 	bl	150 <writebytes>
+ 2d8:	0a00000a 	beq	308 <output+0x168>
+ 304:	ea000020 	b	38c <output+0x1ec>
+ 344:	ea000010 	b	38c <output+0x1ec>
+ 34c:	da000004 	ble	364 <output+0x1c4>
+ 360:	ebffff7a 	bl	150 <writebytes>
+ 390:	e12fff1e 	bx	lr
+000003ac <cl_block>:
+ 3c8:	ba000006 	blt	3e8 <cl_block+0x3c>
+ 3dc:	0a000005 	beq	3f8 <cl_block+0x4c>
+ 3e0:	eb0000bc 	bl	6d8 <__aeabi_idiv>
+ 3e4:	ea000003 	b	3f8 <cl_block+0x4c>
+ 3f4:	eb0000b7 	bl	6d8 <__aeabi_idiv>
+ 40c:	ca00000b 	bgt	440 <cl_block+0x94>
+ 424:	ebffff0d 	bl	60 <cl_hash>
+ 43c:	ebffff57 	bl	1a0 <output>
+ 444:	e12fff1e 	bx	lr
+ 4cc:	ebffff02 	bl	dc <getbyte>
+ 4e0:	aa000007 	bge	504 <compress+0xb0>
+ 500:	dafffffb 	ble	4f4 <compress+0xa0>
+ 510:	ebfffed2 	bl	60 <cl_hash>
+ 524:	ea000039 	b	610 <compress+0x1bc>
+ 528:	ebfffeeb 	bl	dc <getbyte>
+ 55c:	0a00002b 	beq	610 <compress+0x1bc>
+ 564:	ba000010 	blt	5ac <compress+0x158>
+ 594:	0a00001d 	beq	610 <compress+0x1bc>
+ 59c:	da000002 	ble	5ac <compress+0x158>
+ 5a8:	cafffff2 	bgt	578 <compress+0x124>
+ 5c4:	aa000007 	bge	5e8 <compress+0x194>
+ 5e4:	ea000009 	b	610 <compress+0x1bc>
+ 5f0:	ba000005 	blt	60c <compress+0x1b8>
+ 5fc:	0a000002 	beq	60c <compress+0x1b8>
+ 600:	ebffff69 	bl	3ac <cl_block>
+ 608:	ea000000 	b	610 <compress+0x1bc>
+ 618:	caffffc2 	bgt	528 <compress+0xd4>
+ 640:	e12fff1e 	bx	lr
+ 668:	ebfffe64 	bl	0 <initbuffer>
+ 6b0:	ebffff67 	bl	454 <compress>
+ 6b8:	e12fff1e 	bx	lr
+000006d8 <__aeabi_idiv>:
+ 6dc:	0a000043 	beq	7f0 <.divsi3_nodiv0+0x110>
+ 6ec:	0a000027 	beq	790 <.divsi3_nodiv0+0xb0>
+ 6fc:	9a000026 	bls	79c <.divsi3_nodiv0+0xbc>
+ 704:	0a000028 	beq	7ac <.divsi3_nodiv0+0xcc>
+ 728:	3afffffa 	bcc	718 <.divsi3_nodiv0+0x38>
+ 73c:	3afffffa 	bcc	72c <.divsi3_nodiv0+0x4c>
+ 780:	1affffef 	bne	744 <.divsi3_nodiv0+0x64>
+ 78c:	e12fff1e 	bx	lr
+ 798:	e12fff1e 	bx	lr
+ 7a8:	e12fff1e 	bx	lr
+ 7ec:	e12fff1e 	bx	lr
+ 7fc:	ea000007 	b	820 <__aeabi_idiv0>
+00000800 <__aeabi_idivmod>:
+ 804:	0afffff9 	beq	7f0 <.divsi3_nodiv0+0x110>
+ 80c:	ebffffb3 	bl	6e0 <.divsi3_nodiv0>
+ 81c:	e12fff1e 	bx	lr
+00000820 <__aeabi_idiv0>:
+ 820:	e12fff1e 	bx	lr
+00000000 <initbuffer>:
+  80:	1affffe5 	bne	1c <initbuffer+0x1c>
+  88:	e12fff1e 	bx	lr
+  a4:	0a000024 	beq	13c <cl_hash+0xac>
+  f0:	5a000011 	bpl	13c <cl_hash+0xac>
+  f4:	ea000022 	b	184 <cl_hash+0xf4>
+ 180:	5affffdc 	bpl	f8 <cl_hash+0x68>
+ 188:	d12fff1e 	bxle	lr
+ 1a0:	d12fff1e 	bxle	lr
+ 1a8:	0a000003 	beq	1bc <cl_hash+0x12c>
+ 1b8:	d12fff1e 	bxle	lr
+ 1cc:	cafffffa 	bgt	1bc <cl_hash+0x12c>
+ 1d0:	e12fff1e 	bx	lr
+000001d8 <getbyte>:
+ 1e4:	da00000c 	ble	21c <getbyte+0x44>
+ 1fc:	da000006 	ble	21c <getbyte+0x44>
+ 218:	e12fff1e 	bx	lr
+ 220:	e12fff1e 	bx	lr
+00000230 <putbyte>:
+ 240:	e12fff1e 	bx	lr
+00000248 <writebytes>:
+ 250:	da00000f 	ble	294 <writebytes+0x4c>
+ 290:	1afffff3 	bne	264 <writebytes+0x1c>
+ 298:	e12fff1e 	bx	lr
+ 2b8:	ba00005d 	blt	434 <output+0x194>
+ 32c:	0a000061 	beq	4b8 <output+0x218>
+ 340:	da00002b 	ble	3f4 <output+0x154>
+ 34c:	da000017 	ble	3b0 <output+0x110>
+ 358:	da000010 	ble	3a0 <output+0x100>
+ 398:	1afffff3 	bne	36c <output+0xcc>
+ 3c0:	1a000013 	bne	414 <output+0x174>
+ 3f0:	e12fff1e 	bx	lr
+ 400:	dafffff9 	ble	3ec <output+0x14c>
+ 40c:	caffffcf 	bgt	350 <output+0xb0>
+ 410:	eaffffe6 	b	3b0 <output+0x110>
+ 430:	eaffffed 	b	3ec <output+0x14c>
+ 43c:	da000013 	ble	490 <output+0x1f0>
+ 448:	da000010 	ble	490 <output+0x1f0>
+ 48c:	1afffff3 	bne	460 <output+0x1c0>
+ 4b4:	eaffffcc 	b	3ec <output+0x14c>
+ 4e8:	0a000057 	beq	64c <output+0x3ac>
+ 500:	0a000051 	beq	64c <output+0x3ac>
+ 518:	0a00004b 	beq	64c <output+0x3ac>
+ 530:	0a000045 	beq	64c <output+0x3ac>
+ 548:	0a00003f 	beq	64c <output+0x3ac>
+ 560:	0a000039 	beq	64c <output+0x3ac>
+ 578:	0a000033 	beq	64c <output+0x3ac>
+ 590:	0a00002d 	beq	64c <output+0x3ac>
+ 5a8:	0a000027 	beq	64c <output+0x3ac>
+ 5c4:	0a000020 	beq	64c <output+0x3ac>
+ 5dc:	0a00001a 	beq	64c <output+0x3ac>
+ 5f4:	0a000014 	beq	64c <output+0x3ac>
+ 60c:	0a00000e 	beq	64c <output+0x3ac>
+ 624:	0a000008 	beq	64c <output+0x3ac>
+ 654:	eaffff35 	b	330 <output+0x90>
+00000674 <cl_block>:
+ 690:	ba00000b 	blt	6c4 <cl_block+0x50>
+ 6a4:	1a000009 	bne	6d0 <cl_block+0x5c>
+ 6b4:	da00000a 	ble	6e4 <cl_block+0x70>
+ 6c0:	e12fff1e 	bx	lr
+ 6d0:	eb0000fc 	bl	ac8 <__aeabi_idiv>
+ 6e0:	cafffff4 	bgt	6b8 <cl_block+0x44>
+ 6f0:	ebfffe66 	bl	90 <cl_hash>
+ 70c:	eafffee3 	b	2a0 <output>
+ 7a0:	da0000a0 	ble	a28 <compress+0x30c>
+ 7b8:	da00009a 	ble	a28 <compress+0x30c>
+ 7f0:	ca000007 	bgt	814 <compress+0xf8>
+ 808:	dafffffb 	ble	7fc <compress+0xe0>
+ 818:	ebfffe1c 	bl	90 <cl_hash>
+ 834:	da000057 	ble	998 <compress+0x27c>
+ 884:	0a000050 	beq	9cc <compress+0x2b0>
+ 88c:	ba00002f 	blt	950 <compress+0x234>
+ 8ac:	4a000057 	bmi	a10 <compress+0x2f4>
+ 8b8:	0a00003e 	beq	9b8 <compress+0x29c>
+ 8c0:	da000022 	ble	950 <compress+0x234>
+ 8cc:	da00001f 	ble	950 <compress+0x234>
+ 8d4:	0a00000a 	beq	904 <compress+0x1e8>
+ 8ec:	0a000031 	beq	9b8 <compress+0x29c>
+ 8f4:	da000015 	ble	950 <compress+0x234>
+ 900:	da000012 	ble	950 <compress+0x234>
+ 918:	0a000026 	beq	9b8 <compress+0x29c>
+ 920:	da00000a 	ble	950 <compress+0x234>
+ 92c:	4a00003a 	bmi	a1c <compress+0x300>
+ 93c:	0a00001d 	beq	9b8 <compress+0x29c>
+ 944:	da000001 	ble	950 <compress+0x234>
+ 94c:	caffffec 	bgt	904 <compress+0x1e8>
+ 968:	aa00001c 	bge	9e0 <compress+0x2c4>
+ 994:	caffffa7 	bgt	838 <compress+0x11c>
+ 9b4:	e12fff1e 	bx	lr
+ 9c8:	eaffffef 	b	98c <compress+0x270>
+ 9dc:	eaffffea 	b	98c <compress+0x270>
+ 9ec:	baffffe5 	blt	988 <compress+0x26c>
+ 9f8:	0affffe2 	beq	988 <compress+0x26c>
+ 9fc:	ebffff1c 	bl	674 <cl_block>
+ a0c:	eaffffde 	b	98c <compress+0x270>
+ a18:	eaffffa4 	b	8b0 <compress+0x194>
+ a24:	eaffffc1 	b	930 <compress+0x214>
+ a2c:	eaffff68 	b	7d4 <compress+0xb8>
+ a5c:	ebfffd67 	bl	0 <initbuffer>
+ aa8:	eaffff1b 	b	71c <compress>
+00000ac8 <__aeabi_idiv>:
+ acc:	0a000043 	beq	be0 <.divsi3_nodiv0+0x110>
+ adc:	0a000027 	beq	b80 <.divsi3_nodiv0+0xb0>
+ aec:	9a000026 	bls	b8c <.divsi3_nodiv0+0xbc>
+ af4:	0a000028 	beq	b9c <.divsi3_nodiv0+0xcc>
+ b18:	3afffffa 	bcc	b08 <.divsi3_nodiv0+0x38>
+ b2c:	3afffffa 	bcc	b1c <.divsi3_nodiv0+0x4c>
+ b3c:	21800002 	orrcs	r0, r0, r2
+ b48:	218000a2 	orrcs	r0, r0, r2, lsr #1
+ b54:	21800122 	orrcs	r0, r0, r2, lsr #2
+ b60:	218001a2 	orrcs	r0, r0, r2, lsr #3
+ b70:	1affffef 	bne	b34 <.divsi3_nodiv0+0x64>
+ b7c:	e12fff1e 	bx	lr
+ b80:	e13c0000 	teq	ip, r0
+ b88:	e12fff1e 	bx	lr
+ b94:	03800001 	orreq	r0, r0, #1
+ b98:	e12fff1e 	bx	lr
+ bdc:	e12fff1e 	bx	lr
+ be4:	c3e00102 	mvngt	r0, #-2147483648	; 0x80000000
+ bec:	ea000007 	b	c10 <__aeabi_idiv0>
+00000bf0 <__aeabi_idivmod>:
+ bf4:	0afffff9 	beq	be0 <.divsi3_nodiv0+0x110>
+ bfc:	ebffffb3 	bl	ad0 <.divsi3_nodiv0>
+ c0c:	e12fff1e 	bx	lr
+00000c10 <__aeabi_idiv0>:
+ c10:	e12fff1e 	bx	lr
+00000000 <initbuffer>:
+      80:	1affffe5 	bne	1c <initbuffer+0x1c>
+      88:	e12fff1e 	bx	lr
+      a4:	0a000024 	beq	13c <cl_hash+0xac>
+      f0:	5a000011 	bpl	13c <cl_hash+0xac>
+      f4:	ea000022 	b	184 <cl_hash+0xf4>
+     180:	5affffdc 	bpl	f8 <cl_hash+0x68>
+     188:	d12fff1e 	bxle	lr
+     1a0:	d12fff1e 	bxle	lr
+     1a8:	0a00000a 	beq	1d8 <cl_hash+0x148>
+     1b0:	0a000004 	beq	1c8 <cl_hash+0x138>
+     1d4:	d12fff1e 	bxle	lr
+     1f8:	cafffff6 	bgt	1d8 <cl_hash+0x148>
+     1fc:	e12fff1e 	bx	lr
+00000204 <getbyte>:
+     210:	da00000c 	ble	248 <getbyte+0x44>
+     228:	da000006 	ble	248 <getbyte+0x44>
+     244:	e12fff1e 	bx	lr
+     24c:	e12fff1e 	bx	lr
+0000025c <putbyte>:
+     26c:	e12fff1e 	bx	lr
+00000274 <writebytes>:
+     27c:	da00000f 	ble	2c0 <writebytes+0x4c>
+     2bc:	1afffff3 	bne	290 <writebytes+0x1c>
+     2c4:	e12fff1e 	bx	lr
+     2e4:	ba00005b 	blt	458 <output+0x18c>
+     358:	0a00005f 	beq	4dc <output+0x210>
+     36c:	da00002a 	ble	41c <output+0x150>
+     374:	da000017 	ble	3d8 <output+0x10c>
+     380:	da000010 	ble	3c8 <output+0xfc>
+     3c0:	1afffff3 	bne	394 <output+0xc8>
+     3e8:	1a000012 	bne	438 <output+0x16c>
+     418:	e12fff1e 	bx	lr
+     428:	dafffff9 	ble	414 <output+0x148>
+     430:	caffffd0 	bgt	378 <output+0xac>
+     434:	eaffffe7 	b	3d8 <output+0x10c>
+     454:	eaffffee 	b	414 <output+0x148>
+     460:	da000013 	ble	4b4 <output+0x1e8>
+     46c:	da000010 	ble	4b4 <output+0x1e8>
+     4b0:	1afffff3 	bne	484 <output+0x1b8>
+     4d8:	eaffffcd 	b	414 <output+0x148>
+     50c:	0a000057 	beq	670 <output+0x3a4>
+     524:	0a000051 	beq	670 <output+0x3a4>
+     53c:	0a00004b 	beq	670 <output+0x3a4>
+     554:	0a000045 	beq	670 <output+0x3a4>
+     56c:	0a00003f 	beq	670 <output+0x3a4>
+     584:	0a000039 	beq	670 <output+0x3a4>
+     59c:	0a000033 	beq	670 <output+0x3a4>
+     5b4:	0a00002d 	beq	670 <output+0x3a4>
+     5cc:	0a000027 	beq	670 <output+0x3a4>
+     5e8:	0a000020 	beq	670 <output+0x3a4>
+     600:	0a00001a 	beq	670 <output+0x3a4>
+     618:	0a000014 	beq	670 <output+0x3a4>
+     630:	0a00000e 	beq	670 <output+0x3a4>
+     648:	0a000008 	beq	670 <output+0x3a4>
+     678:	eaffff37 	b	35c <output+0x90>
+00000698 <cl_block>:
+     6b8:	ba00000a 	blt	6e8 <cl_block+0x50>
+     6c8:	1a000008 	bne	6f0 <cl_block+0x58>
+     6dc:	da000009 	ble	708 <cl_block+0x70>
+     6e4:	e12fff1e 	bx	lr
+     6f0:	eb0002b3 	bl	11c4 <__aeabi_idiv>
+     704:	cafffff5 	bgt	6e0 <cl_block+0x48>
+     728:	0a000091 	beq	974 <cl_block+0x2dc>
+     774:	5a00007e 	bpl	974 <cl_block+0x2dc>
+     77c:	da00001b 	ble	7f0 <cl_block+0x158>
+     794:	da000015 	ble	7f0 <cl_block+0x158>
+     79c:	0a00000a 	beq	7cc <cl_block+0x134>
+     7a4:	0a000004 	beq	7bc <cl_block+0x124>
+     7c8:	da000008 	ble	7f0 <cl_block+0x158>
+     7ec:	cafffff6 	bgt	7cc <cl_block+0x134>
+     874:	0a00005e 	beq	9f4 <cl_block+0x35c>
+     888:	da00004c 	ble	9c0 <cl_block+0x328>
+     890:	da000016 	ble	8f0 <cl_block+0x258>
+     89c:	da000010 	ble	8e4 <cl_block+0x24c>
+     8dc:	1afffff3 	bne	8b0 <cl_block+0x218>
+     900:	1a000033 	bne	9d4 <cl_block+0x33c>
+     92c:	eaffff6b 	b	6e0 <cl_block+0x48>
+     9b8:	5affffdc 	bpl	930 <cl_block+0x298>
+     9bc:	eaffff6d 	b	778 <cl_block+0xe0>
+     9cc:	caffffae 	bgt	88c <cl_block+0x1f4>
+     9d0:	eaffff42 	b	6e0 <cl_block+0x48>
+     9f0:	eaffff3a 	b	6e0 <cl_block+0x48>
+     a20:	0a000057 	beq	b84 <cl_block+0x4ec>
+     a38:	0a000051 	beq	b84 <cl_block+0x4ec>
+     a50:	0a00004b 	beq	b84 <cl_block+0x4ec>
+     a68:	0a000045 	beq	b84 <cl_block+0x4ec>
+     a80:	0a00003f 	beq	b84 <cl_block+0x4ec>
+     a98:	0a000039 	beq	b84 <cl_block+0x4ec>
+     ab0:	0a000033 	beq	b84 <cl_block+0x4ec>
+     ac8:	0a00002d 	beq	b84 <cl_block+0x4ec>
+     ae0:	0a000027 	beq	b84 <cl_block+0x4ec>
+     afc:	0a000020 	beq	b84 <cl_block+0x4ec>
+     b14:	0a00001a 	beq	b84 <cl_block+0x4ec>
+     b2c:	0a000014 	beq	b84 <cl_block+0x4ec>
+     b44:	0a00000e 	beq	b84 <cl_block+0x4ec>
+     b5c:	0a000008 	beq	b84 <cl_block+0x4ec>
+     b8c:	eaffff39 	b	878 <cl_block+0x1e0>
+00000bb0 <compress>:
+     c34:	da000116 	ble	1094 <compress+0x4e4>
+     c4c:	da000110 	ble	1094 <compress+0x4e4>
+     c88:	ca000007 	bgt	cac <compress+0xfc>
+     ca0:	dafffffb 	ble	c94 <compress+0xe4>
+     cb8:	e31c0010 	tst	ip, #16
+     cc4:	0a000024 	beq	d5c <compress+0x1ac>
+     d10:	5a000011 	bpl	d5c <compress+0x1ac>
+     d14:	ea000022 	b	da4 <compress+0x1f4>
+     da0:	5affffdc 	bpl	d18 <compress+0x168>
+     da8:	da00001b 	ble	e1c <compress+0x26c>
+     db4:	e3e04000 	mvn	r4, #0
+     dc0:	da000015 	ble	e1c <compress+0x26c>
+     dc8:	0a00000a 	beq	df8 <compress+0x248>
+     dd0:	0a000004 	beq	de8 <compress+0x238>
+     df4:	da000008 	ble	e1c <compress+0x26c>
+     e18:	cafffff6 	bgt	df8 <compress+0x248>
+     e2c:	da000082 	ble	103c <compress+0x48c>
+     e78:	0a000068 	beq	1020 <compress+0x470>
+     e80:	ba000057 	blt	fe4 <compress+0x434>
+     ea4:	4a000077 	bmi	1088 <compress+0x4d8>
+     eb0:	0a00005a 	beq	1020 <compress+0x470>
+     eb8:	da000049 	ble	fe4 <compress+0x434>
+     ec4:	da000046 	ble	fe4 <compress+0x434>
+     ed0:	0a000020 	beq	f58 <compress+0x3a8>
+     ed8:	0a000013 	beq	f2c <compress+0x37c>
+     ee0:	0a000008 	beq	f08 <compress+0x358>
+     ef8:	0a000048 	beq	1020 <compress+0x470>
+     f00:	da000037 	ble	fe4 <compress+0x434>
+     f1c:	0a00003f 	beq	1020 <compress+0x470>
+     f24:	da00002e 	ble	fe4 <compress+0x434>
+     f40:	0a000036 	beq	1020 <compress+0x470>
+     f48:	da000025 	ble	fe4 <compress+0x434>
+     f54:	da000022 	ble	fe4 <compress+0x434>
+     f6c:	0a00002b 	beq	1020 <compress+0x470>
+     f74:	da00001a 	ble	fe4 <compress+0x434>
+     f80:	4a000045 	bmi	109c <compress+0x4ec>
+     f8c:	0a000023 	beq	1020 <compress+0x470>
+     f94:	da000012 	ble	fe4 <compress+0x434>
+     fac:	0a00001b 	beq	1020 <compress+0x470>
+     fb4:	da00000a 	ble	fe4 <compress+0x434>
+     fcc:	0a000013 	beq	1020 <compress+0x470>
+     fd4:	da000002 	ble	fe4 <compress+0x434>
+     fe0:	caffffdc 	bgt	f58 <compress+0x3a8>
+     ffc:	aa000016 	bge	105c <compress+0x4ac>
+    101c:	ea000002 	b	102c <compress+0x47c>
+    1038:	caffff7c 	bgt	e30 <compress+0x280>
+    1058:	e12fff1e 	bx	lr
+    1068:	baffffef 	blt	102c <compress+0x47c>
+    1074:	0affffec 	beq	102c <compress+0x47c>
+    1078:	ebfffd86 	bl	698 <cl_block>
+    1084:	eaffffe8 	b	102c <compress+0x47c>
+    1090:	eaffff84 	b	ea8 <compress+0x2f8>
+    1098:	eafffef2 	b	c68 <compress+0xb8>
+    10ac:	1affffb7 	bne	f90 <compress+0x3e0>
+    10b0:	eaffffda 	b	1020 <compress+0x470>
+    115c:	1affffe5 	bne	10f8 <main+0x1c>
+    11a4:	eafffe81 	b	bb0 <compress>
+000011c4 <__aeabi_idiv>:
+    11c8:	0a000043 	beq	12dc <.divsi3_nodiv0+0x110>
+    11d8:	0a000027 	beq	127c <.divsi3_nodiv0+0xb0>
+    11e8:	9a000026 	bls	1288 <.divsi3_nodiv0+0xbc>
+    11f0:	0a000028 	beq	1298 <.divsi3_nodiv0+0xcc>
+    1214:	3afffffa 	bcc	1204 <.divsi3_nodiv0+0x38>
+    1228:	3afffffa 	bcc	1218 <.divsi3_nodiv0+0x4c>
+    126c:	1affffef 	bne	1230 <.divsi3_nodiv0+0x64>
+    1278:	e12fff1e 	bx	lr
+    1284:	e12fff1e 	bx	lr
+    1294:	e12fff1e 	bx	lr
+    12d8:	e12fff1e 	bxgt	lr
+    12e8:	ea000007 	b	130c <__aeabi_idiv0>
+000012ec <__aeabi_idivmod>:
+    12f0:	0afffff9 	beq	12dc <.divsi3_nodiv0+0x110>
+    12f8:	ebffffb3 	bl	11cc <.divsi3_nodiv0>
+    1308:	e12fff1e 	bx	lr
+0000130c <__aeabi_idiv0>:
+    130c:	e12fff1e 	bx	lr
